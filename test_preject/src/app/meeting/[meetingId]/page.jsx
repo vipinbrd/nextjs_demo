@@ -1,16 +1,23 @@
 
+import Head from "next/head"
 import data from "../../../../src/data.json"
 const promise= function sfetch(){return new Promise((res,ref)=>{
         
     setTimeout(()=>{
         res("hi there")
-    },3000)
+    },500)
 })}
-
-export default function MeetingDetail({params}){
+export async function generateMetadata({ params }) {
+  const id = params.meetingId;
+  return {
+    title: `Meeting/${id}`,
+    description: "Know about meeting",
+  };
+}
+export default async function MeetingDetail({params}){
    
-    const id=params.meetingId;
-   const msg= promise().then((res)=>res)
+    const id=  params.meetingId;
+   const msg=  await promise()
 
     let user=data[id-1];
     if(id==3){
@@ -21,6 +28,7 @@ export default function MeetingDetail({params}){
    
        
     return  <>
+
     <h1>Meeting detail page</h1>
 
     <h1>{`Name:-${user.name}`}</h1>
